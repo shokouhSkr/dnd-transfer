@@ -3,9 +3,9 @@ import WithoutTransfer from "./WithoutTransfer";
 
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <WithTransfer />
-      {/* <WithoutTransfer /> */}
+      <WithoutTransfer />
     </div>
   );
 };

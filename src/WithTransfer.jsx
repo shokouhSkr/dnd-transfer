@@ -2,12 +2,28 @@ import { useState } from "react";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { arrayMove, horizontalListSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { Transfer } from "antd";
-import SortableItem from "./components/SortableItem";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const data = Array.from({ length: 10 }).map((_, i) => ({
   key: i.toString(),
   title: `content${i + 1}`,
 }));
+
+const SortableItem = ({ id, value, onDoubleClick }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} onClick={onDoubleClick}>
+      {value}
+    </div>
+  );
+};
 
 const WithTransfer = () => {
   const [targetKeys, setTargetKeys] = useState([]);
